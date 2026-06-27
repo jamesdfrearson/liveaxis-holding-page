@@ -1,0 +1,21 @@
+.input {
+  width: 100%;
+  display: block;
+
+  &__label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 15px;
+    background-color: #171717;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.9rem;
+  }
+}
