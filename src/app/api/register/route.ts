@@ -79,7 +79,7 @@ export async function POST(request: Request) {
       unsubscribeUrl: url.toString(),
     });
 
-    sendEmail({
+    await sendEmail({
       to: result.data.email,
       subject,
       text,
