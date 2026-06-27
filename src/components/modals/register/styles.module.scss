@@ -1,0 +1,74 @@
+.modal {
+  width: 500px;
+  background-color: #171717;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 10px;
+  overflow: auto;
+  max-height: calc(100svh - 20px);
+
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__close {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+      stroke: #ffffff;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+  & p {
+    margin: 10px 0;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.4rem;
+    opacity: 0.9;
+  }
+
+  &__form {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.button {
+  width: 100%;
+  padding: 20px;
+  font-size: 1rem;
+  border-radius: 250px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  color: #010101;
+  font-weight: bold;
+  background-color: #ffffff;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 20px 0;
+}

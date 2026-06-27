@@ -1,0 +1,33 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 5000;
+  transition: 0.2s all ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  @media screen and (min-width: 500px) {
+    align-items: center;
+  }
+
+  &--open {
+    top: 0;
+    opacity: 1;
+  }
+
+  &__content {
+    overflow-y: scroll;
+    flex: 1;
+  }
+
+  &__actions {
+    height: auto;
+  }
+}
