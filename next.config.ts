@@ -6,26 +6,30 @@ const isProduction = process.env.NODE_ENV === "production";
 const contentSecurityPolicy = [
   "default-src 'none'",
 
-  // Next.js development requires eval for debugging and HMR.
-  `script-src 'self'${isDevelopment ? " 'unsafe-eval'" : ""}`,
+  [
+    "script-src",
+    "'self'",
+    "'unsafe-inline'",
+    ...(isDevelopment ? ["'unsafe-eval'"] : []),
+  ].join(" "),
+
+  // Prevent HTML attributes such as onclick="..." from executing.
   "script-src-attr 'none'",
 
-  // Development tooling may inject inline styles.
-  `style-src 'self'${isDevelopment ? " 'unsafe-inline'" : ""}`,
-
+  "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
   `connect-src 'self'${isDevelopment ? " ws: wss:" : ""}`,
   "media-src 'self'",
   "manifest-src 'self'",
-  "worker-src 'self'",
+  "worker-src 'self' blob:",
   "frame-src 'none'",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
 
-  ...(isProduction ? ["upgrade-insecure-requests"] : []),
+  ...(!isDevelopment ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [
@@ -115,12 +119,6 @@ const nextConfig: NextConfig = {
   },
 
   experimental: {
-    // Adds integrity hashes to generated scripts.
-    // App Router only and currently experimental.
-    sri: {
-      algorithm: "sha384",
-    },
-
     serverActions: {
       // Keep request parsing bounded. Do not add allowedOrigins unless required.
       bodySizeLimit: "1mb",
