@@ -150,15 +150,6 @@ async function getGraphAccessToken(): Promise<string> {
       );
     }
 
-    if (process.env.NODE_ENV !== "production") {
-      console.info("Microsoft Graph email token", {
-        tenantId: claims.tid,
-        clientId: tokenClientId,
-        audience: claims.aud,
-        roles: claims.roles ?? [],
-      });
-    }
-
     return result.token;
   } catch (error) {
     throw new Error("Unable to authenticate with Microsoft Graph.", {
