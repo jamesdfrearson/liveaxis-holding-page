@@ -120,7 +120,7 @@ function decodeTokenClaims(token: string): MicrosoftGraphTokenClaims {
 const mimeTransporter = nodemailer.createTransport({
   streamTransport: true,
   buffer: true,
-  newline: "unix",
+  newline: "windows",
 });
 
 async function getGraphAccessToken(): Promise<string> {
@@ -148,15 +148,6 @@ async function getGraphAccessToken(): Promise<string> {
         `Microsoft Graph token belongs to application ` +
           `${tokenClientId ?? "unknown"}, expected ${expectedClientId}.`,
       );
-    }
-
-    if (process.env.NODE_ENV !== "production") {
-      console.info("Microsoft Graph email token", {
-        tenantId: claims.tid,
-        clientId: tokenClientId,
-        audience: claims.aud,
-        roles: claims.roles ?? [],
-      });
     }
 
     return result.token;
@@ -190,6 +181,7 @@ async function createMimeMessage({
     html,
     text,
     replyTo,
+    textEncoding: "base64",
     ...(auditBcc ? { bcc: auditBcc } : {}),
   };
 
