@@ -120,7 +120,7 @@ function decodeTokenClaims(token: string): MicrosoftGraphTokenClaims {
 const mimeTransporter = nodemailer.createTransport({
   streamTransport: true,
   buffer: true,
-  newline: "unix",
+  newline: "windows",
 });
 
 async function getGraphAccessToken(): Promise<string> {
@@ -190,6 +190,7 @@ async function createMimeMessage({
     html,
     text,
     replyTo,
+    textEncoding: "base64",
     ...(auditBcc ? { bcc: auditBcc } : {}),
   };
 
